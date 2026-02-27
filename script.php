@@ -1,18 +1,6 @@
 <?php
 session_start();
 
-// IMPORTANT: Handle reset via GET parameter FIRST (for auto-reset)
-if (isset($_GET['reset']) && $_GET['reset'] == 'true') {
-    session_destroy();
-    session_start();
-    $_SESSION['step'] = 1;
-    $_SESSION['angPaoValues'] = array();
-    $_SESSION['angpao_count'] = 1;
-    // Redirect to remove the reset parameter from URL
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
-}
-
 // Initialize variables
 $numberOfAngPao = 0;
 $totalAngPao = 0;

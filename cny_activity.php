@@ -316,6 +316,7 @@
     if ($result['isTotalExpensesGreaterThanTotalAngPao']) {
         echo "<p>Total expenses exceeded total Ang Pao</p>";
     }
+    
 
     echo "</div>";
 
@@ -328,14 +329,7 @@
     echo "<form method='POST'>";
     echo "<button type='submit' name='reset'>START NEW SESSION</button>";
     echo "</form>";
-
-    echo "<div class='auto-reset'>";
-    echo "Page will reset automatically in 10 seconds...";
-    echo "</div>";
-
-    echo "<meta http-equiv='refresh' content='10;url=" . $_SERVER['PHP_SELF'] . "?reset=true'>";
-    echo "</div>";
-                    }       
+                } 
             }
             ?>
         
