@@ -1,0 +1,126 @@
+INITIAL LAYDOWN OF IDEAS
+Business Context:
+- I task the team to make an interactive kiosk in a mall that will hold a Chinese New Year themed activity where you enter the Ang Pao you received and expenses you've made with the Ang Pao that will compute you're Lucky or not. Lucky customers will receive offers and promos in the mall.
+
+User Algorithm:
+Ang Pao Section
+1. Ask how many Ang Paos received
+2. Generate Input Boxes for number of Ang Paos received
+3. Enter values of each Ang Pao
+4. Calculate total Ang Pao Received
+5. Collapse Section and next Section Appears
+
+Ang Pao Expenses Section:
+1. Enter Food Expenses
+2. Enter Transportation Expenses
+3. Calculate total expenses
+
+Summary Section:
+1. Show summary of inputs 
+2. Offer to edit past sections
+3. Confirm
+
+Lucky Section:
+1. Show Lucky Status
+2. Give Lucky Promo if Lucky
+3. Auto reset the page after a given amount of time after the display of the Lucky status
+---
+Application Algorithm:
+Number of Angpao letters (Increment/Decrement Operators)
+- Increment to add a letter
+- Decrement to remove a letter
+
+Received Money per Ang Pao (Arithmetic Operators(Add))
+- Add received money per Ang Pao 
+
+Expenses on CNY (Assignment Operator(Sub))
+- Subtract expenses from food expenses and transportation
+---
+MEETING WITH THE BACKEND
+1. Declaration of Variables
+⦁	Number of Ang Pao Receive
+⦁	Ang Pao Values (Array)
+⦁	Total Ang Pao
+⦁	Food Expenses
+⦁	Transportation Expense
+⦁	Total Expenses
+⦁	Lucky Number
+⦁	Birth Year Animal
+⦁	Color of Underwear
+⦁	Remaining Money
+⦁	Fixed Bonus (+= 500)
+
+2. Increment / Decrement Operations
+⦁	Increment: Number of Ang Pao Receive ++ (maximum 20)
+⦁	Decrement: Number of Ang Pao Receive -- (minimum 1)
+⦁	Array Insertion: Add each Ang Pao value to array
+
+3. Input Validation
+⦁	All Ang Pao values must be numeric and > 0
+⦁	Food/Transportation Expenses must be numeric and ≥ 0
+⦁	Lucky Number must be between 1-99
+⦁	Birth Year must be between 1900-current year
+⦁	Underwear color must be selected
+
+4. Arithmetic Operations
+⦁	Total Ang Pao = Sum of all values in Ang Pao Array
+⦁	Total Expenses = Food Expenses + Transportation Expenses
+⦁	Remaining Money = Total Ang Pao - Food Expenses
+⦁	Remaining Money = Remaining Money × 2 (IF birth year animal is Horse)
+⦁	Remaining Money = Remaining Money × 2 (IF lucky number is 😎
+
+5. Assignment Operations
+⦁	Remaining Money += Fixed Bonus (+500)
+⦁	Remaining Money -= Transportation Expenses
+6. Comparison Operations (Boolean)
+⦁	Is Remaining Money > 5000?
+⦁	Is Remaining Money == 8?
+⦁	Is Total Expenses > Total Ang Pao?
+
+7. Logical Operations (Status Determination)
+⦁	Status is "Unfortunately Unlucky" when expenses exceed total Ang Pao
+⦁	Status is "Unlucky" when total Ang Pao is less than 5000
+⦁	Status is "Lucky" when total Ang Pao exceeds 5000
+⦁	Status becomes "Extremely Lucky" only when all three conditions are met: total Ang Pao exceeds 5000 AND birth year is Horse AND lucky number is 8
+⦁	Discount becomes 75% when underwear color is Red (overrides other discounts)
+
+8. Display Results
+⦁	Happy Chinese New Year!
+⦁	Total Ang Pao: [amount]
+⦁	Total Expenses: [amount]
+⦁	Remaining After Expenses: [amount]
+⦁	Horse Bonus Applied! (if applicable)
+⦁	Lucky Number 8 Bonus Applied! (if applicable)
+⦁	Your Lucky Status: [status]
+
+9. Reveal Coupon (Based on Status)
+⦁	Extremely Lucky - 50% Discount
+⦁	Lucky - 25% Discount
+⦁	Unlucky - 10% Discount
+⦁	Unfortunately Unlucky - 5% Discount
+⦁	Red Underwear Special - 75% Discount (overrides all)
+---
+MEETING WITH FRONTEND
+The webpage will only have one page. I'm thinking the page should be in the aesthetic of Chinese New Year. Lots of gold as it is a Prosperity Calculator. I'm thinking elements should be use and filling up the screen as it is for a Mall setting and for commercial purposes. I want mallgoers to be able to see it from a distance and get them interested to try.
+
+The page however will have multiple set of forms/views:
+
+Ang Pao
+Expenses and Luck Factors
+Summary
+Result
+Ang Pao
+Image
+
+This will be the landing form where the user can add ang pao red envelopes. The user will add and subtract to how many envelopes they have received. I'm thinking to make the form look like an Ang Pao envelope or perhaps like a money bill.
+Expenses and Luck Factors
+Image
+
+This will be the form where they put their expenses and lucky details. I'm thinking simple divisions between the two but if you think of something unique kindly incorporate it.
+Summary
+Image
+
+Result
+Image
+
+I want this to be the most rewarding looking page for the user to see as they will receive a promo depending on their results.
