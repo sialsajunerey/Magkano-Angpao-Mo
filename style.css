@@ -1,7 +1,5 @@
 
-/* ===============================
-   PAGE BACKGROUND & TYPOGRAPHY
-================================== */
+/* PAGE BACKGROUND */
 body {
     margin: 0;
     padding: 0;
@@ -14,9 +12,7 @@ body {
     color: #2b2b2b;
 }
 
-/* ===============================
-   CONTAINER WRAPPER + HIGHLIGHT
-================================== */
+/* CONTAINER WRAPPER */
 .container-wrapper {
     position: relative;
     display: flex;
@@ -37,16 +33,14 @@ body {
     z-index: -1;
 }
 
-/* ===============================
-   MAIN CONTAINER
-================================== */
+/* MAIN CONTAINER */
 .container {
     position: relative;
     width: 750px;
     max-width: 90%;
     margin: 60px auto;
     padding: 50px 40px;
-    background: #fffdf8; /* very light cream */
+    background: #fffdf8;
     border-radius: 25px;
     box-shadow: 0 0 40px rgba(0,0,0,0.1), inset 0 0 10px rgba(0,0,0,0.05);
     border: 3px solid #ffd700; /* gold border */
@@ -58,16 +52,14 @@ body {
     box-shadow: 0 0 60px rgba(0,0,0,0.15), inset 0 0 15px rgba(0,0,0,0.05);
 }
 
-/* ===============================
-   TITLES & HEADINGS
-================================== */
+/* TITLES & HEADINGS */
 h1 {
     font-family: 'Fredoka', sans-serif;
-    font-weight: 700; /* mas bold look */
+    font-weight: 700;
     font-size: 48px;
     text-align: center;
     color: #8B0000;
-     text-transform: uppercase;
+    text-transform: uppercase;
 
     /* Simple shine effect */
     text-shadow:
@@ -87,13 +79,11 @@ h2, h3 {
     letter-spacing: 1px;
 }
 
-/* ===============================
-   SUBTITLES / LABELS
-================================== */
+/* SUBTITLES & LABELS */
 label, .subtitle {
     display: block;
-    width: 85%;          /* same width as input */
-    margin: 0 auto 5px;  /* center like input */
+    width: 85%;          
+    margin: 0 auto 5px;  
     text-align: left;
     font-family: 'Fredoka', sans-serif;
     font-size: 15px;
@@ -123,37 +113,41 @@ select:focus {
     transform: scale(1.03); 
 }
 
-/* ===============================
-   BUTTONS - UPDATED TO MATCH LIGHT THEME
-================================== */
-button {
-    padding: 14px 30px;
-    margin: 15px 8px;
+/* BUTTONS */
+button,
+input[type="submit"],
+input[type="button"],
+a.button-link {
+
+    padding: 16px 50px;     
+    margin: 20px 8px;      
     border: none;
-    border-radius: 25px; 
-    font-weight: bold;
-    font-size: 16px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 18px;        
     cursor: pointer;
     font-family: 'Fredoka', sans-serif;
-    background: linear-gradient(45deg, #fff8e7, #ffd700); /* light festive gradient */
-    color: #8b0000;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1), inset 0 0 10px rgba(255,215,0,0.2);
-    transition: all 0.3s ease;
+
+    /* Gradient at color same lang */
+    background: linear-gradient(to right, #f9e7b0, #f6c800);
+    color: #8B0000;
+
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.25s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
 }
 
-button:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 25px gold, 0 0 50px #ffd700;
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+a.button-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
 }
 
-button[name="reset"] {
-    background: linear-gradient(45deg, #eee, #bbb); /* muted for reset */
-    color: #8b0000;
-}   
-
-/* ===============================
-   RESULT BOXES
-================================== */
+/* RESULT BOXES */
 .result-box {
     background: #fff8e7;
     border: 2px solid #ffd700;
@@ -206,9 +200,7 @@ button[name="reset"] {
     to { text-shadow: 0 0 35px orange; }
 }
 
-/* ===============================
-   SUMMARY / PROMO BOXES
-================================== */
+/* SUMMARY / PROMO BOXES */
 .summary-box, .promo-box {
     padding: 25px;
     border-radius: 20px;
@@ -220,12 +212,12 @@ button[name="reset"] {
 }
 
 .promo-box {
-    background: linear-gradient(135deg, #ffd700, #ffeb3b, #fff176); /* golden gradient */
+    background: linear-gradient(135deg, #ffd700, #ffeb3b, #fff176); 
     text-align: center;
     font-weight: bold;
     font-size: 20px;
     color: #8B0000;
-    border: 4px solid gold; /* thicker gold border */
+    border: 4px solid gold; 
     border-radius: 25px;
     padding: 30px 20px;
     box-shadow: 0 0 40px gold, 0 0 80px #ffd700, inset 0 0 20px #fff176;
@@ -270,9 +262,7 @@ button[name="reset"] {
     100% { background-position: 0% 50%; }
 }
 
-/* ===============================
-   SUMMARY SECTION LAYOUT
-================================== */
+/* SUMMARY SECTION LAYOUT */
 .summary-section {
     width: 85%;
     margin: 0 auto;
@@ -311,16 +301,12 @@ button[name="reset"] {
     font-size: 17px;
 }
 
-/* Highlight important values */
 .highlight {
     font-weight: 700;
     color: #b22222;
     font-size: 19px;
 }
 
-/* ===============================
-   FOOTER NOTE
-================================== */
 .auto-reset {
     display: none;
 }
