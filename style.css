@@ -1,0 +1,326 @@
+
+/* ===============================
+   PAGE BACKGROUND & TYPOGRAPHY
+================================== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Fredoka', sans-serif;
+    min-height: 100vh;
+    background: url("cnyy.png") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    color: #2b2b2b;
+}
+
+/* ===============================
+   CONTAINER WRAPPER + HIGHLIGHT
+================================== */
+.container-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.container-wrapper::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,255,200,0.3) 0%, transparent 70%);
+    border-radius: 35px;
+    z-index: -1;
+}
+
+/* ===============================
+   MAIN CONTAINER
+================================== */
+.container {
+    position: relative;
+    width: 750px;
+    max-width: 90%;
+    margin: 60px auto;
+    padding: 50px 40px;
+    background: #fffdf8; /* very light cream */
+    border-radius: 25px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.1), inset 0 0 10px rgba(0,0,0,0.05);
+    border: 3px solid #ffd700; /* gold border */
+    transition: 0.4s ease;
+    margin-right: 150px;
+}
+
+.container:hover {
+    box-shadow: 0 0 60px rgba(0,0,0,0.15), inset 0 0 15px rgba(0,0,0,0.05);
+}
+
+/* ===============================
+   TITLES & HEADINGS
+================================== */
+h1 {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700; /* mas bold look */
+    font-size: 48px;
+    text-align: center;
+    color: #8B0000;
+     text-transform: uppercase;
+
+    /* Simple shine effect */
+    text-shadow:
+        0 0 5px gold,
+        0 0 10px #ffd700,
+        0 0 20px rgba(255,215,0,0.6);
+
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+h2, h3 {
+    font-family: 'Fredoka', sans-serif;
+    text-align: center;
+    color: #b22222;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+/* ===============================
+   SUBTITLES / LABELS
+================================== */
+label, .subtitle {
+    display: block;
+    width: 85%;          /* same width as input */
+    margin: 0 auto 5px;  /* center like input */
+    text-align: left;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 15px;
+    color: #8B0000;
+}
+
+input[type="number"],
+input[type="text"],
+select {
+    width: 85%;
+    padding: 14px;
+    margin: 10px auto;
+    display: block;
+    border-radius: 20px;
+    border: 2px solid #ffd700; 
+    font-size: 16px;
+    background: #fff8e7; 
+    box-shadow: inset 0 0 10px rgba(255,215,0,0.2);
+    font-family: 'Fredoka', sans-serif;
+    transition: 0.3s ease, transform 0.2s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: #ff8c00; 
+    box-shadow: 0 0 15px gold;
+    transform: scale(1.03); 
+}
+
+/* ===============================
+   BUTTONS - UPDATED TO MATCH LIGHT THEME
+================================== */
+button {
+    padding: 14px 30px;
+    margin: 15px 8px;
+    border: none;
+    border-radius: 25px; 
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: 'Fredoka', sans-serif;
+    background: linear-gradient(45deg, #fff8e7, #ffd700); /* light festive gradient */
+    color: #8b0000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1), inset 0 0 10px rgba(255,215,0,0.2);
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px gold, 0 0 50px #ffd700;
+}
+
+button[name="reset"] {
+    background: linear-gradient(45deg, #eee, #bbb); /* muted for reset */
+    color: #8b0000;
+}   
+
+/* ===============================
+   RESULT BOXES
+================================== */
+.result-box {
+    background: #fff8e7;
+    border: 2px solid #ffd700;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: inset 0 0 10px rgba(255,215,0,0.2);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 18px;
+}
+
+/* Result status inside box */
+.status {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 15px;
+    border: 2px solid gold;
+}
+
+.lucky {
+    color: green;
+    background: rgba(0,128,0,0.1);
+}
+
+.extremely {
+    color: #b8860b;
+    background: rgba(255,215,0,0.2);
+    box-shadow: 0 0 20px rgba(255,215,0,0.4);
+}
+
+.unlucky {
+    color: #8b0000;
+    background: rgba(139,0,0,0.1);
+}
+
+.bonus-green {
+    color: green;
+    font-weight: bold;
+}
+
+.bonus-red {
+    color: red;
+    font-weight: bold;
+}
+
+@keyframes shine {
+    from { text-shadow: 0 0 15px gold; }
+    to { text-shadow: 0 0 35px orange; }
+}
+
+/* ===============================
+   SUMMARY / PROMO BOXES
+================================== */
+.summary-box, .promo-box {
+    padding: 25px;
+    border-radius: 20px;
+    border: 3px solid gold;
+    margin-top: 25px;
+    box-shadow: inset 0 0 20px rgba(255,215,0,0.4);
+    font-size: 18px;
+    font-family: 'Fredoka', sans-serif;
+}
+
+.promo-box {
+    background: linear-gradient(135deg, #ffd700, #ffeb3b, #fff176); /* golden gradient */
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: #8B0000;
+    border: 4px solid gold; /* thicker gold border */
+    border-radius: 25px;
+    padding: 30px 20px;
+    box-shadow: 0 0 40px gold, 0 0 80px #ffd700, inset 0 0 20px #fff176;
+    animation: promo-glow 1.5s infinite alternate, sparkle 2s infinite linear;
+    position: relative;
+    overflow: hidden;
+}
+
+.summary-section {
+    margin-top: 30px;
+}
+
+.summary-card {
+    background: #fff8e7;
+    border: 2px solid #ffd700;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: inset 0 0 15px rgba(255,215,0,0.3);
+    text-align: center;
+}
+
+.summary-card h3 {
+    margin-bottom: 15px;
+    color: #8b0000;
+    letter-spacing: 1px;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 20px gold; }
+    to { box-shadow: 0 0 45px orange; }
+}
+
+@keyframes promo-glow {
+    from { box-shadow: 0 0 30px gold, 0 0 60px #ffd700, inset 0 0 10px #fff176; }
+    to { box-shadow: 0 0 50px gold, 0 0 100px #ffd700, inset 0 0 30px #fff176; }
+}
+
+@keyframes sparkle {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===============================
+   SUMMARY SECTION LAYOUT
+================================== */
+.summary-section {
+    width: 85%;
+    margin: 0 auto;
+}
+
+/* Individual Cards */
+.summary-card {
+    background: #fff8e7;
+    border: 2px solid #ffd700;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(255,215,0,0.3);
+}
+
+/* Section Titles inside box */
+.summary-card h3 {
+    text-align: center;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    color: #8B0000;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+/* Paragraph spacing */
+.summary-card p {
+    text-align: center;
+    margin: 8px 0;
+    font-size: 17px;
+}
+
+/* Highlight important values */
+.highlight {
+    font-weight: 700;
+    color: #b22222;
+    font-size: 19px;
+}
+
+/* ===============================
+   FOOTER NOTE
+================================== */
+.auto-reset {
+    display: none;
+}

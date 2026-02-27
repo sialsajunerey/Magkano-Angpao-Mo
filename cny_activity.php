@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <title>Magkano Ang Pao Mo?</title>
     <link rel="stylesheet" href="style.css">
@@ -67,7 +68,7 @@
             ?>
             
             <div class="counter-container">
-                <h2>Algorithm 1</h2>
+                <h2>Share your Ang Pao!</h2>
                 <h3>Ang Pao Count & Values</h3>
                 
                 <div class="counter-controls">
@@ -109,8 +110,7 @@
         // STEP 2: Expenses Section
         elseif ($step == 3) {
             ?>
-            <h2>Algorithm 3</h2>
-            <h3>Expenses & Details</h3>
+            <h2>Expenses & Details</h2>
             <form method="POST" action="">
                 <h3>Expenses:</h3>
                 <label>Food Expenses (PHP): </label>
@@ -172,28 +172,36 @@
                 $totalExpenses = $foodExpenses + $transpoExpenses;
                 $remaining = $totalAngPao - $totalExpenses + 500;
                 ?>
-                <h2>Step 4</h2>
-                <h3>Summary/Confirmation</h3>
+                <div class="summary-section">
 
-                <h3>Ang Pao Summary:</h3>
-                <p>Number of Ang Pao: <?php echo count($_SESSION['angPaoValues']); ?></p>
-                <p>Individual Ang Pao Values: <?php echo implode(", ", $_SESSION['angPaoValues']); ?></p>
-                <p><strong>Total Ang Pao: PHP<?php echo number_format($totalAngPao, 2); ?></strong></p>
-                
-                <h3>Expenses Summary:</h3>
-                <p>Food Expenses: PHP<?php echo number_format($foodExpenses, 2); ?></p>
-                <p>Transportation Expenses: PHP<?php echo number_format($transpoExpenses, 2); ?></p>
-                <p>Total Expenses: PHP<?php echo number_format($totalExpenses, 2); ?></p>
-                
-                <h3>Other Details:</h3>
-                <p>Lucky Number: <?php echo $luckyNumber; ?></p>
-                <p>Birth Year: <?php echo $birthYear; ?></p>
-                <p>Your Chinese Zodiac: <strong><?php echo $birthYearAnimal; ?></strong></p>
-                <p>Underwear Color: <?php echo $colorOfUnderware; ?></p>
-                <p>Fixed Bonus: PHP500.00</p>
-                
-                <h3>Calculations:</h3>
-                <p>Remaining Money (after expenses + bonus): PHP<?php echo number_format($remaining, 2); ?></p>
+                <div class="summary-card">
+                    <h3>Ang Pao Summary</h3>
+                    <p>Number of Ang Pao: 1</p>
+                    <p>Individual Ang Pao Values: 34</p>
+                    <p class="highlight">Total Ang Pao: PHP34.00</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Expenses Summary</h3>
+                    <p>Food Expenses: PHP34.00</p>
+                    <p>Transportation Expenses: PHP34.00</p>
+                    <p class="highlight">Total Expenses: PHP68.00</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Other Details</h3>
+                    <p>Lucky Number: 43</p>
+                    <p>Your Chinese Zodiac: <strong>Dragon</strong></p>
+                    <p>Underwear Color: Brown</p>
+                    <p>Fixed Bonus: PHP500.00</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Calculations</h3>
+                    <p class="highlight">Remaining Money: PHP466.00</p>
+                </div>
+
+            </div>
                 
                 <!-- Go to Step 5: Lucky Status-->
                 <form method="POST" action="" style="display: inline;">
@@ -220,74 +228,107 @@
             }
         }
         
-        // STEP 5: Lucky Section
-        elseif ($step == 5) {
-            // Check if all required session variables exist
-            if (!isset($_SESSION['angPaoValues']) || empty($_SESSION['angPaoValues']) || 
-                !isset($_SESSION['foodExpenses']) || !isset($_SESSION['transportationExpense']) || 
-                !isset($_SESSION['luckyNumber']) || !isset($_SESSION['birthYearAnimal']) || 
-                !isset($_SESSION['colorOfUnderware'])) {
-                $_SESSION['step'] = 1;
-                echo "<p>Session expired. Please start over.</p>";
-                echo "<form method='POST' action=''><input type='submit' name='reset' value='Start Over'></form>";
-            } else {
-                $totalAngPao = array_sum($_SESSION['angPaoValues']);
-                $foodExpenses = $_SESSION['foodExpenses'];
-                $transpoExpenses = $_SESSION['transportationExpense'];
-                $luckyNumber = $_SESSION['luckyNumber'];
-                $birthYearAnimal = $_SESSION['birthYearAnimal'];
-                $colorOfUnderware = $_SESSION['colorOfUnderware'];
-                
-                $result = calculateLuckyStatus(
-                    $totalAngPao, 
-                    $foodExpenses, 
-                    $transpoExpenses, 
-                    $luckyNumber, 
-                    $birthYearAnimal,
-                    $colorOfUnderware
-                );
-                
-                echo "<h2>Your Lucky Status</h2>";
-                echo "<h1>" . $result['status'] . "</h1>";
-                echo "<p>Born in <strong>" . $_SESSION['birthYear'] . "</strong> → Your Chinese Zodiac is: <strong>" . $birthYearAnimal . "</strong></p>";
+            // STEP 5: Lucky Section
+            elseif ($step == 5) {
+                // Check if all required session variables exist
+                if (!isset($_SESSION['angPaoValues']) || empty($_SESSION['angPaoValues']) || 
+                    !isset($_SESSION['foodExpenses']) || !isset($_SESSION['transportationExpense']) || 
+                    !isset($_SESSION['luckyNumber']) || !isset($_SESSION['birthYearAnimal']) || 
+                    !isset($_SESSION['colorOfUnderware'])) {
+                    $_SESSION['step'] = 1;
+                    echo "<p>Session expired. Please start over.</p>";
+                    echo "<form method='POST' action=''><input type='submit' name='reset' value='Start Over'></form>";
+                } else {
 
-                
-                // Display bonuses
-                if ($result['luckyNumberBonusApplied']) {
-                    echo "<p style='color: green;'>Lucky Number 8 Bonus Applied! (Remaining money doubled)</p>";
-                }
-                if ($result['redBonusApplied']) {
-                    echo "<p style='color: red;'>Red Underwear Bonus! 75% discount applied!</p>";
-                }
-                
-                echo "<p>Total Ang Pao: PHP" . number_format($result['totalAngPao'], 2) . "</p>";
-                echo "<p>Total Expenses: PHP" . number_format($result['totalExpenses'], 2) . "</p>";
-                echo "<p>Remaining Money: PHP" . number_format($result['remainingMoney'], 2) . "</p>";
-                
-                // Comparison results
-                if ($result['isRemainingGreaterThan5000']) {
-                    echo "<p>✓ Remaining money is greater than PHP5000</p>";
-                }
-                if ($result['isRemainingEqualTo8']) {
-                    echo "<p>Lucky number 8 detected!</p>";
-                }
-                if ($result['isTotalExpensesGreaterThanTotalAngPao']) {
-                    echo "<p>Total expenses exceeded total Ang Pao</p>";
-                }
-                
-                echo "<h2>Special Promo!</h2>";
-                echo "<p>You get <strong>" . $result['discount'] . "% discount</strong> on your next purchase!</p>";
-                
-                echo "<br><form method='POST' action=''>";
-                echo "<input type='submit' name='reset' value='Start New Session'>";
-                echo "</form>";
-                
-                // AUTO-RESET CODE
-                echo "<meta http-equiv='refresh' content='10;url=" . $_SERVER['PHP_SELF'] . "?reset=true'>";
-                echo "<p><small>Page will reset automatically in 10 seconds...</small></p>";
+    $totalAngPao = array_sum($_SESSION['angPaoValues']);
+    $foodExpenses = $_SESSION['foodExpenses'];
+    $transpoExpenses = $_SESSION['transportationExpense'];
+    $luckyNumber = $_SESSION['luckyNumber'];
+    $birthYearAnimal = $_SESSION['birthYearAnimal'];
+    $colorOfUnderware = $_SESSION['colorOfUnderware'];
+
+    $result = calculateLuckyStatus(
+        $totalAngPao,
+        $foodExpenses,
+        $transpoExpenses,
+        $luckyNumber,
+        $birthYearAnimal,
+        $colorOfUnderware
+    );
+
+    // Determine status class
+    $statusClass = "";
+    if (stripos($result['status'], "EXTREMELY") !== false) {
+        $statusClass = "extremely";
+    } elseif (stripos($result['status'], "LUCKY") !== false) {
+        $statusClass = "lucky";
+    } else {
+        $statusClass = "unlucky";
+    }
+
+    echo "<div class='summary-section'>";
+
+    // ===== STATUS CARD =====
+    echo "<div class='summary-card'>";
+    echo "<h3>LUCKY STATUS</h3>";
+    echo "<div class='status $statusClass'>" . $result['status'] . "</div>";
+    echo "<p>Born in <strong>" . $_SESSION['birthYear'] . "</strong></p>";
+    echo "<p>Chinese Zodiac: <strong>" . $birthYearAnimal . "</strong></p>";
+    echo "</div>";
+
+    // ===== FINANCIAL CARD =====
+    echo "<div class='summary-card'>";
+    echo "<h3>FINANCIAL SUMMARY</h3>";
+    echo "<p>Total Ang Pao: <strong>PHP " . number_format($result['totalAngPao'], 2) . "</strong></p>";
+    echo "<p>Total Expenses: <strong>PHP " . number_format($result['totalExpenses'], 2) . "</strong></p>";
+    echo "<p>Remaining Money: <strong>PHP " . number_format($result['remainingMoney'], 2) . "</strong></p>";
+    echo "</div>";
+
+    // ===== BONUSES CARD =====
+    echo "<div class='summary-card'>";
+    echo "<h3>BONUSES & EVENTS</h3>";
+
+    if ($result['luckyNumberBonusApplied']) {
+        echo "<p class='bonus-green'>Lucky Number 8 Bonus Applied (Money Doubled)</p>";
+    }
+
+    if ($result['redBonusApplied']) {
+        echo "<p class='bonus-red'>Red Underwear Bonus (75% Discount Applied)</p>";
+    }
+
+    if ($result['isRemainingGreaterThan5000']) {
+        echo "<p>Remaining money is greater than PHP 5000</p>";
+    }
+
+    if ($result['isRemainingEqualTo8']) {
+        echo "<p>Lucky number 8 detected</p>";
+    }
+
+    if ($result['isTotalExpensesGreaterThanTotalAngPao']) {
+        echo "<p>Total expenses exceeded total Ang Pao</p>";
+    }
+
+    echo "</div>";
+
+    // ===== PROMO CARD =====
+    echo "<div class='summary-card promo-box'>";
+    echo "<h3>SPECIAL PROMO</h3>";
+    echo "<p>You get <strong>" . $result['discount'] . "% discount</strong> on your next purchase!</p>";
+    echo "</div>";
+
+    echo "<form method='POST'>";
+    echo "<button type='submit' name='reset'>START NEW SESSION</button>";
+    echo "</form>";
+
+    echo "<div class='auto-reset'>";
+    echo "Page will reset automatically in 10 seconds...";
+    echo "</div>";
+
+    echo "<meta http-equiv='refresh' content='10;url=" . $_SERVER['PHP_SELF'] . "?reset=true'>";
+    echo "</div>";
+                    }       
             }
-        }
-        ?>
+            ?>
         
     </div>
     </center>
