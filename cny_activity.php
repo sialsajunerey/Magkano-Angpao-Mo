@@ -4,52 +4,105 @@
 <head>
     <meta charset="UTF-8">
     <title>Magkano Ang Pao Mo?</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
+    <div class="container">
         <h1>Magkano Ang Pao Mo?</h1>
         
         <?php
         // Display current step
         $step = isset($_SESSION['step']) ? $_SESSION['step'] : 1;
         
-        // STEP 1: Ask how many Ang Paos received
+        // STEP 1: Combined Ang Pao Count + Value Entry
         if ($step == 1) {
+            // Initialize count if not set
+            if (!isset($_SESSION['angpao_count'])) {
+                $_SESSION['angpao_count'] = 1;
+            }
+            
+            // Handle increment
+            if (isset($_POST['increment'])) {
+                if ($_SESSION['angpao_count'] < 20) {
+                    $_SESSION['angpao_count']++;
+                }
+                header("Location: " . $_SERVER['PHP_SELF']);
+                exit();
+            }
+            
+            // Handle decrement
+            if (isset($_POST['decrement'])) {
+                if ($_SESSION['angpao_count'] > 1) {
+                    $_SESSION['angpao_count']--;
+                }
+                header("Location: " . $_SERVER['PHP_SELF']);
+                exit();
+            }
+            
+            // Handle save and proceed
+            if (isset($_POST['save_and_proceed'])) {
+                $angPaoValues = array();
+                $valid = true;
+                
+                for ($i = 1; $i <= $_SESSION['angpao_count']; $i++) {
+                    if (isset($_POST['angpao_' . $i]) && is_numeric($_POST['angpao_' . $i]) && $_POST['angpao_' . $i] > 0) {
+                        $angPaoValues[] = $_POST['angpao_' . $i];
+                    } else {
+                        $valid = false;
+                        echo "<p style='color: red;'>Error: Please enter valid amount for Ang Pao #$i</p>";
+                    }
+                }
+                
+                if ($valid) {
+                    $_SESSION['numberOfAngPao'] = $_SESSION['angpao_count'];
+                    $_SESSION['angPaoValues'] = $angPaoValues;
+                    $_SESSION['step'] = 3; // Go to expenses
+                    header("Location: " . $_SERVER['PHP_SELF']);
+                    exit();
+                }
+            }
+            
+            $count = $_SESSION['angpao_count'];
             ?>
-            <h2>Algorithm 1</h2> 
-            <h3>Ang Pao Count</h3> 
-            <form method="POST" action="">
-                <label>How many Ang Pao's did you receive? (1-10): </label>
-                <input type="number" name="numberOfAngPao" min="1" max="10" required>
-                <input type="submit" name="submit_angpao" value="Next">
-            </form>
-            <?php
-        }
-        
-        // STEP 1b: Enter values of each Ang Pao
-        elseif ($step == 2) {
-            // Check if numberOfAngPao is set
-            if (!isset($_SESSION['numberOfAngPao'])) {
-                $_SESSION['step'] = 1;
-                echo "<p>Session error. Please start over.</p>";
-                echo "<form method='POST' action=''><input type='submit' name='reset' value='Start Over'></form>";
-            } else {
-                $count = $_SESSION['numberOfAngPao'];
-                ?>
-                <h2>Algorithm 2</h2>
-                <h3>Enter the value of each Ang Pao</h3>
-                <form method="POST" action="">
+            
+            <div class="counter-container">
+                <h2>Algorithm 1</h2>
+                <h3>Ang Pao Count & Values</h3>
+                
+                <div class="counter-controls">
+                    <form method="POST" action="" style="display: inline;">
+                        <button type="submit" name="decrement" class="btn-counter" 
+                            <?php echo ($count <= 1) ? 'disabled' : ''; ?>>−</button>
+                    </form>
+                    
+                    <span class="count-display"><?php echo $count; ?></span>
+                    
+                    <form method="POST" action="" style="display: inline;">
+                        <button type="submit" name="increment" class="btn-counter"
+                            <?php echo ($count >= 20) ? 'disabled' : ''; ?>>+</button>
+                    </form>
+                </div>
+                
+                <p class="counter-label">Number of Ang Pao's: <strong><?php echo $count; ?></strong></p>
+                
+                <form method="POST" action="" class="values-form">
+                    <h4>Enter amount for each Ang Pao:</h4>
+                    
                     <?php
                     for ($i = 1; $i <= $count; $i++) {
+                        $value = isset($_SESSION['temp_values'][$i]) ? $_SESSION['temp_values'][$i] : '';
+                        echo "<div class='input-group'>";
                         echo "<label>Ang Pao #$i: PHP</label>";
-                        echo "<input type='number' name='angpao_$i' step='0.01' min='1' required><br>";
+                        echo "<input type='number' name='angpao_$i' step='0.01' min='1' value='$value' required>";
+                        echo "</div>";
                     }
                     ?>
+                    
                     <br>
-                    <input type="submit" name="submit_angpao_values" value="Calculate Total">
+                    <button type="submit" name="save_and_proceed" class="btn-proceed">Save & Proceed to Expenses →</button>
                 </form>
-                <?php
-            }
+            </div>
+            <?php
         }
         
         // STEP 2: Expenses Section
@@ -103,6 +156,10 @@
                 
                 <input type="submit" name="submit_expenses" value="Calculate Lucky Status">
             </form>
+            
+            <form method="POST" action="" style="display:inline;">
+                <button type="submit" name="back_to_step1" class="btn-proceed">← Back to Edit Ang Pao</button>
+            </form>
             <?php
         }
         
@@ -155,18 +212,18 @@
                     <input type="submit" name="confirm" value="Confirm & See Lucky Status">
                 </form>
                 
-                <!--Go to Step 2: Edit Ang Pao values  -->
-                <form method="POST" action="" style="display: inline;">
-                    <input type="hidden" name="edit_step" value="2">
-                    <input type="submit" name="edit" value="Edit Ang Pao Values">
-                </form>
-                
-                <!--  Go to Step 3: Edit Expenses-->
+                <!-- Go to Step 3: Edit Expenses-->
                 <form method="POST" action="" style="display: inline;">
                     <input type="hidden" name="edit_step" value="3">
                     <input type="submit" name="edit" value="Edit Expenses">
                 </form>
 
+                <!--Go to Step 1: Edit Ang Pao -->
+                <form method="POST" action="" style="display: inline;">
+                    <input type="hidden" name="edit_step" value="1">
+                    <input type="submit" name="edit" value="Edit Ang Pao">
+                </form>
+                
                 <!--Go to Step 1: Reset All Data -->
                 <form method="POST" action="" style="display: inline;">
                     <input type="submit" name="reset" value="Reset All Data">
@@ -206,8 +263,8 @@
                 echo "<h1>" . $result['status'] . "</h1>";
                 
                 // Display bonuses
-                if ($result['horseBonusApplied']) {
-                    echo "<p style='color: green;'>Horse Bonus Applied! (Remaining money doubled)</p>";
+                if ($result['luckyNumberBonusApplied']) {
+                    echo "<p style='color: green;'>Lucky Number 8 Bonus Applied! (Remaining money doubled)</p>";
                 }
                 if ($result['redBonusApplied']) {
                     echo "<p style='color: red;'>Red Underwear Bonus! 75% discount applied!</p>";
@@ -222,10 +279,10 @@
                     echo "<p>✓ Remaining money is greater than PHP5000</p>";
                 }
                 if ($result['isRemainingEqualTo8']) {
-                    echo "<p>✨ Lucky number 8 detected!</p>";
+                    echo "<p>Lucky number 8 detected!</p>";
                 }
                 if ($result['isTotalExpensesGreaterThanTotalAngPao']) {
-                    echo "<p>⚠️ Total expenses exceeded total Ang Pao</p>";
+                    echo "<p>Total expenses exceeded total Ang Pao</p>";
                 }
                 
                 echo "<h2>Special Promo!</h2>";
@@ -239,11 +296,6 @@
                 echo "<meta http-equiv='refresh' content='10;url=" . $_SERVER['PHP_SELF'] . "?reset=true'>";
                 echo "<p><small>Page will reset automatically in 10 seconds...</small></p>";
             }
-        } else {
-            // Fallback - if step is not 1-5, set to 1
-            $_SESSION['step'] = 1;
-            echo "<p>Redirecting to start...</p>";
-            echo "<meta http-equiv='refresh' content='1;url=" . $_SERVER['PHP_SELF'] . "'>";
         }
         ?>
         
