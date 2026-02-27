@@ -123,7 +123,7 @@
                 <label>Lucky Number (1-99): </label>
                 <input type="number" name="luckyNumber" min="1" max="99" required><br>
                 
-                <label>Your Birth Year (e.g., 1990): </label>
+                <label>Your Birth Year (1900-2026): </label>
                 <input type="number" 
                     name="birthYear" 
                     min="1900" 
@@ -133,8 +133,8 @@
                     title="Please enter a 4-digit year"
                     oninput="this.value = this.value.slice(0,4)"
                     required>
-                <br>   
-                           
+                <br>
+
                 <label>Color of Underwear: </label>
                 <select name="colorOfUnderware" required>
                     <option value="">Select Color</option>
@@ -185,29 +185,29 @@
 
                 <div class="summary-card">
                     <h3>Ang Pao Summary</h3>
-                    <p>Number of Ang Pao: 1</p>
-                    <p>Individual Ang Pao Values: 34</p>
-                    <p class="highlight">Total Ang Pao: PHP34.00</p>
+                    <p>Number of Ang Pao: <?php echo count($_SESSION['angPaoValues']); ?></p>
+                    <p>Individual Ang Pao Values: <?php echo implode(', ', $_SESSION['angPaoValues']); ?></p>
+                    <p class="highlight">Total Ang Pao: PHP<?php echo $totalAngPao; ?></p>
                 </div>
 
                 <div class="summary-card">
                     <h3>Expenses Summary</h3>
-                    <p>Food Expenses: PHP34.00</p>
-                    <p>Transportation Expenses: PHP34.00</p>
-                    <p class="highlight">Total Expenses: PHP68.00</p>
+                    <p>Food Expenses: PHP<?php echo $foodExpenses; ?></p>
+                    <p>Transportation Expenses: PHP<?php echo $transpoExpenses; ?></p>
+                    <p class="highlight">Total Expenses: PHP<?php echo $totalExpenses; ?></p>
                 </div>
 
                 <div class="summary-card">
                     <h3>Other Details</h3>
-                    <p>Lucky Number: 43</p>
-                    <p>Your Chinese Zodiac: <strong>Dragon</strong></p>
-                    <p>Underwear Color: Brown</p>
+                    <p>Lucky Number: <?php echo $luckyNumber; ?></p>
+                    <p>Your Chinese Zodiac: <strong><?php echo $birthYearAnimal; ?></strong></p>
+                    <p>Underwear Color: <?php echo $colorOfUnderware; ?></p>
                     <p>Fixed Bonus: PHP500.00</p>
                 </div>
 
                 <div class="summary-card">
                     <h3>Calculations</h3>
-                    <p class="highlight">Remaining Money: PHP466.00</p>
+                    <p class="highlight">Remaining Money: PHP<?php echo $remaining; ?></p>
                 </div>
 
             </div>
