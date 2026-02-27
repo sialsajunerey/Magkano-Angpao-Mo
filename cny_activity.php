@@ -124,8 +124,17 @@
                 <input type="number" name="luckyNumber" min="1" max="99" required><br>
                 
                 <label>Your Birth Year (e.g., 1990): </label>
-                <input type="number" name="birthYear" min="1900" max="<?php echo date('Y'); ?>" required><br>
-                                
+                <input type="number" 
+                    name="birthYear" 
+                    min="1900" 
+                    max="<?php echo date('Y'); ?>" 
+                    step="1"
+                    pattern="\d{4}"
+                    title="Please enter a 4-digit year"
+                    oninput="this.value = this.value.slice(0,4)"
+                    required>
+                <br>   
+                           
                 <label>Color of Underwear: </label>
                 <select name="colorOfUnderware" required>
                     <option value="">Select Color</option>

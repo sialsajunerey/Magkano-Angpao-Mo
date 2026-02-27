@@ -25,6 +25,7 @@ $luckyNumber = 0;
 $birthYear = "";
 $colorOfUnderware = "";
 $angPaoArray = array();
+$birthYearAnimal = "";     
 $luckyStatus = "";
 $discountPercentage = 0;
 
@@ -108,7 +109,7 @@ function getChineseZodiac($year) {
 }
 
 // Calculate function
-function calculateLuckyStatus($totalAngPao, $foodExpenses, $transportationExpense, $luckyNumber, $colorOfUnderware) {
+function calculateLuckyStatus($totalAngPao, $foodExpenses,$birthYearAnimal, $transportationExpense, $luckyNumber, $colorOfUnderware) {
     
     // Arithmetic Operations
     $totalExpenses = $foodExpenses + $transportationExpense;
@@ -165,6 +166,7 @@ function calculateLuckyStatus($totalAngPao, $foodExpenses, $transportationExpens
         'totalExpenses' => $totalExpenses,
         'totalAngPao' => $totalAngPao,
         'luckyNumberBonusApplied' => $luckyNumberBonusApplied,
+        'birthYearAnimal' => $birthYearAnimal,
         'redBonusApplied' => $redBonusApplied,
         'isRemainingGreaterThan5000' => $isRemainingGreaterThan5000,
         'isRemainingEqualTo8' => $isRemainingEqualTo8,
