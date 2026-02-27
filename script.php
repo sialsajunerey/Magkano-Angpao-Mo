@@ -22,7 +22,7 @@ $totalExpenses = 0;
 $remainingMoney = 0;
 $fixedBonus = 500;
 $luckyNumber = 0;
-$birthYearAnimal = "";
+$birthYear = "";
 $colorOfUnderware = "";
 $angPaoArray = array();
 $luckyStatus = "";
@@ -50,7 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['foodExpenses'] = $_POST['foodExpenses'];
         $_SESSION['transportationExpense'] = $_POST['transportationExpense'];
         $_SESSION['luckyNumber'] = $_POST['luckyNumber'];
-        $_SESSION['birthYearAnimal'] = $_POST['birthYearAnimal'];
+        $_SESSION['birthYear'] = $_POST['birthYear'];
+        $_SESSION['birthYearAnimal'] = getChineseZodiac($_POST['birthYear']);
         $_SESSION['colorOfUnderware'] = $_POST['colorOfUnderware'];
         $_SESSION['step'] = 4;
         // Redirect to prevent form resubmission
@@ -86,8 +87,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
+// Function to get Chinese Zodiac from birth year
+function getChineseZodiac($year) {
+    $zodiac = array(
+        'Rat', 'Ox', 'Tiger', 'Rabbit', 'Dragon', 'Snake', 
+        'Horse', 'Goat', 'Monkey', 'Rooster', 'Dog', 'Pig'
+    );
+    
+    // Chinese zodiac cycles every 12 years
+    // 2020 was Rat year, 2021 Ox, etc.
+    // Formula: (year - 4) % 12 gives index
+    $index = ($year - 4) % 12;
+    
+    // Handle negative indices
+    if ($index < 0) {
+        $index += 12;
+    }
+    
+    return $zodiac[$index];
+}
+
 // Calculate function
-function calculateLuckyStatus($totalAngPao, $foodExpenses, $transportationExpense, $luckyNumber, $birthYearAnimal, $colorOfUnderware) {
+function calculateLuckyStatus($totalAngPao, $foodExpenses, $transportationExpense, $luckyNumber, $colorOfUnderware) {
     
     // Arithmetic Operations
     $totalExpenses = $foodExpenses + $transportationExpense;

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <center>
     <div class="container">
         <h1>Magkano Ang Pao Mo?</h1>
         
@@ -122,23 +123,9 @@
                 <label>Lucky Number (1-99): </label>
                 <input type="number" name="luckyNumber" min="1" max="99" required><br>
                 
-                <label>Birth Year Animal: </label>
-                <select name="birthYearAnimal" required>
-                    <option value="">Select Animal</option>
-                    <option value="Rat">Rat</option>
-                    <option value="Ox">Ox</option>
-                    <option value="Tiger">Tiger</option>
-                    <option value="Rabbit">Rabbit</option>
-                    <option value="Dragon">Dragon</option>
-                    <option value="Snake">Snake</option>
-                    <option value="Horse">Horse</option>
-                    <option value="Goat">Goat</option>
-                    <option value="Monkey">Monkey</option>
-                    <option value="Rooster">Rooster</option>
-                    <option value="Dog">Dog</option>
-                    <option value="Pig">Pig</option>
-                </select><br>
-                
+                <label>Your Birth Year (e.g., 1990): </label>
+                <input type="number" name="birthYear" min="1900" max="<?php echo date('Y'); ?>" required><br>
+                                
                 <label>Color of Underwear: </label>
                 <select name="colorOfUnderware" required>
                     <option value="">Select Color</option>
@@ -200,7 +187,8 @@
                 
                 <h3>Other Details:</h3>
                 <p>Lucky Number: <?php echo $luckyNumber; ?></p>
-                <p>Birth Year Animal: <?php echo $birthYearAnimal; ?></p>
+                <p>Birth Year: <?php echo $birthYear; ?></p>
+                <p>Your Chinese Zodiac: <strong><?php echo $birthYearAnimal; ?></strong></p>
                 <p>Underwear Color: <?php echo $colorOfUnderware; ?></p>
                 <p>Fixed Bonus: PHP500.00</p>
                 
@@ -261,6 +249,8 @@
                 
                 echo "<h2>Your Lucky Status</h2>";
                 echo "<h1>" . $result['status'] . "</h1>";
+                echo "<p>Born in <strong>" . $_SESSION['birthYear'] . "</strong> → Your Chinese Zodiac is: <strong>" . $birthYearAnimal . "</strong></p>";
+
                 
                 // Display bonuses
                 if ($result['luckyNumberBonusApplied']) {
@@ -300,5 +290,6 @@
         ?>
         
     </div>
+    </center>
 </body>
 </html>
